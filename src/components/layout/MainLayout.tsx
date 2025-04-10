@@ -14,14 +14,14 @@ export function MainLayout({ children }: MainLayoutProps) {
 
   if (loading) {
     return (
-      <div className="h-screen w-full flex items-center justify-center">
-        <Loader2 className="h-10 w-10 animate-spin text-primary" />
+      <div className="h-screen w-full flex items-center justify-center bg-white">
+        <Loader2 className="h-10 w-10 animate-spin text-black" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       <div className="flex flex-1">
         <Sidebar />
