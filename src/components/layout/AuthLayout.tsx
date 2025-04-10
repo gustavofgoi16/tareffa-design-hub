@@ -19,7 +19,7 @@ export function AuthLayout({
 
   if (loading) {
     return (
-      <div className="h-screen w-full flex items-center justify-center">
+      <div className="h-screen w-full flex items-center justify-center bg-background">
         <Loader2 className="h-10 w-10 animate-spin text-primary" />
       </div>
     );
@@ -37,5 +37,5 @@ export function AuthLayout({
     return <Navigate to="/dashboard" replace />;
   }
 
-  return <>{children}</>;
+  return <div className="bg-background min-h-screen">{children}</div>;
 }
