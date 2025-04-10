@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,7 @@ import {
   Palette, 
   PenTool, 
   Eye, 
-  FilePresentation, 
+  Presentation, 
   Smartphone, 
   Workflow, 
   FolderArchive,
@@ -188,7 +187,7 @@ const Index = () => {
               {
                 title: "Presentations",
                 description: "We create engaging designs for everything from pitch decks to corporate presentations.",
-                icon: <FilePresentation className="h-8 w-8" />
+                icon: <Presentation className="h-8 w-8" />
               },
               {
                 title: "Web & App Designs",
