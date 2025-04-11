@@ -1,6 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { BenefitCard } from "@/components/ui/benefitcard";
+import Logo from "@/assets/logo/tareffa.svg";
+import ilustracao01 from '@/assets/ilustracoes/1.svg';
+import ilustracao02 from '@/assets/ilustracoes/2.svg';
+import ilustracao03 from '@/assets/ilustracoes/3.svg';
+import { motion } from "framer-motion";
 import { FeaturesGrid } from "@/components/ui/FeaturesGrid";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +21,24 @@ import {
   Smartphone,
   PersonStanding,
 } from "lucide-react";
+
+const scrollingTexts = [
+  "Design",
+  "Pedidos Ilimitados",
+  "Entrega em até 48hrs",
+  "Múltiplos membros",
+  "Templates prontos",
+  "Design personalizável",
+  "Peça para a IA",
+  "IA Assist",
+  "Design",
+  "Múltiplos membros",
+  "Pedidos Ilimitados",
+  "Templates prontos",
+  "Design personalizável",
+  "Entrega em até 48hrs",
+]
+
 
 // Dados centralizados
 const beneficios = [
@@ -71,12 +94,13 @@ const Index = () => {
       {/* Navbar */}
       <header className="w-full py-4 border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <div
-            className="text-xl font-bold text-primary cursor-pointer"
-            onClick={() => navigate("/")}
-          >
-            TAREFFA360
-          </div>
+        <div
+  className="cursor-pointer flex items-center gap-2"
+  onClick={() => navigate("/")}
+>
+  <img src={Logo} alt="Logo Tareffa" className="h-8 w-auto" />
+</div>
+
           <nav className="hidden md:flex gap-6 text-sm text-muted-foreground">
             <a href="#beneficios" className="hover:text-primary">Benefícios</a>
             <a href="#como-funciona" className="hover:text-primary">Como Funciona</a>
@@ -207,49 +231,102 @@ const Index = () => {
 
     {/* Blocos alinhados horizontalmente */}
     <div className="flex flex-wrap justify-center gap-6">
-      {/* Bloco 1 */}
-      <div className="w-[425px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
-        {/* Placeholder para ilustração */}
-        <div className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center">
-          <span className="text-sm text-gray-400">[Ilustração ou ícone]</span>
-        </div>
-        {/* Texto */}
-        <div className="space-y-1">
-          <h3 className="text-lg font-medium text-gray-900">01. Envie sua Solicitação</h3>
-          <p className="text-sm text-muted-foreground">
-            Use o formulário inteligente da TAREFFA360 para enviar suas demandas de design. Seu gerente de projeto vai revisar e iniciar o processo.
-          </p>
-        </div>
-      </div>
-
-      {/* Bloco 2 */}
-      <div className="w-[425px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
-        <div className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center">
-          <span className="text-sm text-gray-400">[Ilustração ou ícone]</span>
-        </div>
-        <div className="space-y-1">
-          <h3 className="text-lg font-medium text-gray-900">02. Colabore com o Time</h3>
-          <p className="text-sm text-muted-foreground">
-            Seu gerente e o time de designers trabalham nas suas solicitações, mantêm você informado e entregam os arquivos para revisão.
-          </p>
-        </div>
-      </div>
-
-      {/* Bloco 3 */}
-      <div className="w-[345px] h-[430px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
-        <div className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center">
-          <span className="text-sm text-gray-400">[Ilustração ou ícone]</span>
-        </div>
-        <div className="space-y-1">
-          <h3 className="text-lg font-medium text-gray-900">03. Revise, Aprove e Repita</h3>
-          <p className="text-sm text-muted-foreground">
-            Acompanhe os designs entregues, envie feedback com comentários e continue criando novas solicitações sem limites.
-          </p>
-        </div>
-      </div>
+  {/* Bloco 1 */}
+  <div className="w-[350px] h-[430px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
+    <motion.div
+      className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      <motion.img
+        src={ilustracao01}
+        alt="Ilustração passo 1"
+        className="w-48 h-48"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+      />
+    </motion.div>
+    <div className="space-y-1">
+      <h3 className="text-lg font-medium text-gray-900">01. Envie sua Solicitação</h3>
+      <p className="text-sm text-muted-foreground">
+        Use o formulário inteligente da TAREFFA360 para enviar suas demandas de design. Seu gerente de projeto vai revisar e iniciar o processo.
+      </p>
     </div>
   </div>
+
+  {/* Bloco 2 */}
+  <div className="w-[350px] h-[430px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
+    <motion.div
+      className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+    >
+      <motion.img
+        src={ilustracao02} // importe esse SVG no topo
+        alt="Ilustração passo 2"
+        className="w-48 h-48"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+      />
+    </motion.div>
+    <div className="space-y-1">
+      <h3 className="text-lg font-medium text-gray-900">02. Colabore com o Time</h3>
+      <p className="text-sm text-muted-foreground">
+        Seu gerente e o time de designers trabalham nas suas solicitações, mantêm você informado e entregam os arquivos para revisão.
+      </p>
+    </div>
+  </div>
+
+  {/* Bloco 3 */}
+  <div className="w-[350px] h-[430px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
+    <motion.div
+      className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+    >
+      <motion.img
+        src={ilustracao03} // importe esse SVG no topo
+        alt="Ilustração passo 3"
+        className="w-48 h-48"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+      />
+    </motion.div>
+    <div className="space-y-1">
+      <h3 className="text-lg font-medium text-gray-900">03. Revise, Aprove e Repita</h3>
+      <p className="text-sm text-muted-foreground">
+        Acompanhe os designs entregues, envie feedback com comentários e continue criando novas solicitações sem limites.
+      </p>
+    </div>
+  </div>
+</div>
+
+  </div>
 </section>
+
+{/* Marquee de textos passando automaticamente */}
+<div className="relative w-full overflow-hidden my-12">
+<div className="flex whitespace-nowrap animate-marquee hover:animate-marquee-slow">
+
+    {[...scrollingTexts, ...scrollingTexts].map((text, index) => (
+      <button
+        key={index}
+        className="border-[0.5px] h-[40px] px-4 mx-2 text-sm rounded-full text-muted-foreground hover:bg-muted/20 transition-colors"
+      >
+        {text}
+      </button>
+    ))}
+  </div>
+</div>
+
+
+
 
 
 
@@ -261,3 +338,70 @@ const Index = () => {
 };
 
 export default Index;
+
+import { cn } from "@/lib/utils";
+
+const features = [
+  "Design",
+  "Pedidos Ilimitados",
+  "Entrega em até 48hrs",
+  "Múltiplos membros",
+  "Templates prontos",
+  "Design personalizável",
+  "Peça para a IA",
+  "IA Assist",
+  "Design",
+  "Múltiplos membros",
+  "Pedidos Ilimitados",
+  "Templates prontos",
+  "Design personalizável",
+  "Entrega em até 48hrs",
+];
+
+export function InfiniteScrollText() {
+  return (
+    <div className="overflow-hidden py-6 bg-muted border-y">
+      <div className="animate-marquee whitespace-nowrap flex gap-4">
+        {features.map((text, idx) => (
+          <button
+            key={idx}
+            className={cn(
+              "h-10 px-4 rounded-full border border-border text-sm text-muted-foreground bg-background hover:bg-accent transition"
+            )}
+          >
+            {text}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+<section className="overflow-hidden whitespace-nowrap border-y border-gray-200 bg-muted">
+  <div className="animate-marquee flex gap-6 py-2">
+    {[
+      "Design",
+      "Pedidos Ilimitados",
+      "Entrega em até 48hrs",
+      "Múltiplos membros",
+      "Templates prontos",
+      "Design personalizável",
+      "Peça para a IA",
+      "IA Assist",
+      "Design",
+      "Múltiplos membros",
+      "Pedidos Ilimitados",
+      "Templates prontos",
+      "Design personalizável",
+      "Entrega em até 48hrs",
+    ].map((text, idx) => (
+      <span
+        key={idx}
+        className="flex items-center justify-center border rounded-full h-10 px-4 text-sm bg-white text-gray-800"
+      >
+        {text}
+      </span>
+    ))}
+  </div>
+</section>
+

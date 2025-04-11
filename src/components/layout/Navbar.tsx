@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
+import Logo from "@/assets/logo/tareffa.svg";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -28,7 +29,12 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between py-4">
         <div className="flex items-center gap-2">
           <div onClick={() => navigate("/")} className="cursor-pointer flex items-center">
-            <span className="text-2xl font-bold text-primary">Tareffa Design Hub</span>
+          <img
+  src={Logo}
+  alt="Tareffa Logo"
+  className="h-10 w-auto"
+/>
+
           </div>
         </div>
 
