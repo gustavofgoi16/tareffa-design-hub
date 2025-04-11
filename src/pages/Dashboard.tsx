@@ -6,9 +6,19 @@ import { useOrders } from "@/context/OrderContext";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { AuthLayout } from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PlusCircle, Clock, CheckCircle, Loader2, BarChart } from "lucide-react";
+import { 
+  PlusCircle, 
+  Clock, 
+  CheckCircle, 
+  Loader2, 
+  BarChart, 
+  Filter,
+  Star,
+  Calendar,
+  MoreHorizontal
+} from "lucide-react";
 import { format } from "date-fns";
 
 const Dashboard = () => {
@@ -21,11 +31,6 @@ const Dashboard = () => {
     acc[order.status] = (acc[order.status] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
-
-  // Get the latest orders
-  const recentOrders = [...orders]
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, 5);
 
   const getStatusColor = (status: string) => {
     const statusColors: Record<string, string> = {
@@ -55,134 +60,146 @@ const Dashboard = () => {
   return (
     <AuthLayout>
       <MainLayout>
-        <div className="flex flex-col space-y-6">
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight">Welcome, {user.name}</h1>
-            <p className="text-muted-foreground">
-              Here's an overview of your design orders
-            </p>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-medium">Projetos</h1>
+          </div>
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" className="flex items-center gap-1.5">
+              <Filter className="h-4 w-4" />
+              Filtrar
+            </Button>
+            <Button onClick={() => navigate("/orders/new")} className="flex items-center gap-1.5">
+              <PlusCircle className="h-4 w-4" />
+              Criar projeto
+            </Button>
+          </div>
+        </div>
+
+        <div className="bg-white border rounded-lg overflow-hidden">
+          <div className="border-b py-3 px-4 flex items-center text-sm font-medium text-muted-foreground">
+            <div className="w-1/2">Título</div>
+            <div className="w-1/6 text-center">Status</div>
+            <div className="w-1/6 text-center">Prioridade</div>
+            <div className="w-1/6 text-center">Data Estimada</div>
+            <div className="w-1/6 text-center">Progresso</div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
-                <BarChart className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{orders.length}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">In Production</CardTitle>
-                <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{ordersByStatus.IN_PRODUCTION || 0}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Delivered</CardTitle>
-                <CheckCircle className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{ordersByStatus.DELIVERED || 0}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Active Plan</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{user.plan}</div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card className="col-span-2 md:col-span-1">
-              <CardHeader>
-                <CardTitle>Recent Orders</CardTitle>
-                <CardDescription>
-                  Your most recent design requests
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {isLoading ? (
-                  <div className="flex items-center justify-center py-6">
-                    <Loader2 className="h-6 w-6 animate-spin text-primary" />
-                  </div>
-                ) : recentOrders.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center space-y-3 py-6">
-                    <div className="text-center">
-                      <p className="text-sm text-muted-foreground">No orders yet</p>
-                      <p className="text-xs text-muted-foreground">Create your first design request</p>
+          {isLoading ? (
+            <div className="flex items-center justify-center p-8">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+          ) : orders.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <h3 className="text-lg font-semibold">Nenhum projeto encontrado</h3>
+              <p className="text-muted-foreground mb-4 mt-2">
+                Crie seu primeiro projeto de design
+              </p>
+              <Button onClick={() => navigate("/orders/new")}>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Novo Projeto
+              </Button>
+            </div>
+          ) : (
+            <div>
+              {orders.map((order, index) => (
+                <div 
+                  key={order.id}
+                  onClick={() => navigate(`/orders/${order.id}`)}
+                  className={`flex items-center py-3 px-4 hover:bg-muted/50 cursor-pointer ${index !== orders.length - 1 ? 'border-b' : ''}`}
+                >
+                  <div className="w-1/2 flex items-center gap-3">
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full border flex items-center justify-center">
+                      <CheckCircle className="h-3.5 w-3.5 text-muted-foreground/30" />
+                    </div>
+                    <div>
+                      <div className="font-medium">{order.title}</div>
+                      <div className="text-xs text-muted-foreground">Criado em {format(new Date(order.createdAt), "dd/MM/yyyy")}</div>
                     </div>
                   </div>
-                ) : (
-                  <div className="space-y-4">
-                    {recentOrders.map((order) => (
-                      <div
-                        key={order.id}
-                        className="flex items-center space-x-4 rounded-md border p-4"
-                      >
-                        <div className="flex-1 space-y-1">
-                          <div className="flex items-center gap-2">
-                            <p className="text-sm font-medium">{order.title}</p>
-                            <Badge
-                              variant="outline"
-                              className={getStatusColor(order.status)}
-                            >
-                              <span className="flex items-center gap-1">
-                                {getStatusIcon(order.status)}
-                                {order.status.replace("_", " ")}
-                              </span>
-                            </Badge>
-                          </div>
-                          <p className="text-xs text-muted-foreground">
-                            Created on {format(new Date(order.createdAt), "PP")}
-                          </p>
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => navigate(`/orders/${order.id}`)}
-                        >
-                          View
-                        </Button>
-                      </div>
-                    ))}
+                  <div className="w-1/6 flex justify-center">
+                    <Badge
+                      variant="outline"
+                      className={getStatusColor(order.status)}
+                    >
+                      <span className="flex items-center gap-1">
+                        {getStatusIcon(order.status)}
+                        {order.status === "RECEIVED" ? "Recebido" :
+                          order.status === "IN_PRODUCTION" ? "Em produção" :
+                          order.status === "IN_REVIEW" ? "Em revisão" :
+                          order.status === "DELIVERED" ? "Entregue" : 
+                          order.status === "REJECTED" ? "Rejeitado" : order.status}
+                      </span>
+                    </Badge>
                   </div>
-                )}
-              </CardContent>
-              <CardFooter>
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => navigate("/orders")}
-                >
-                  View All Orders
-                </Button>
-              </CardFooter>
-            </Card>
+                  <div className="w-1/6 flex justify-center">
+                    {index === 0 ? (
+                      <span className="flex items-center">
+                        <Star className="h-4 w-4 fill-amber-400 text-amber-400 mr-1" />
+                        Alta
+                      </span>
+                    ) : (
+                      <span className="text-muted-foreground">-</span>
+                    )}
+                  </div>
+                  <div className="w-1/6 flex justify-center">
+                    {index === 0 ? (
+                      <span className="flex items-center">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        {format(new Date(), "dd/MM/yyyy")}
+                      </span>
+                    ) : (
+                      <span className="text-muted-foreground">-</span>
+                    )}
+                  </div>
+                  <div className="w-1/6 flex justify-center">
+                    <span className="text-sm font-medium">
+                      {index % 3 === 0 ? "100%" : 
+                       index % 3 === 1 ? "50%" : "0%"}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
-            <Card className="col-span-2 md:col-span-1">
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-                <CardDescription>Create a new design request</CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-4">
-                <Button
-                  className="w-full justify-start"
-                  onClick={() => navigate("/orders/new")}
-                >
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  New Design Request
-                </Button>
-              </CardContent>
-            </Card>
+        <div className="mt-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-medium">Atividade Recente</h2>
+            <Button variant="ghost" size="sm">
+              Ver tudo
+            </Button>
+          </div>
+
+          <div className="space-y-3">
+            {orders.slice(0, 3).map((order) => (
+              <div 
+                key={order.id}
+                className="border rounded-md p-3 hover:bg-muted/50 cursor-pointer"
+                onClick={() => navigate(`/orders/${order.id}`)}
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <div className="font-medium">{order.title}</div>
+                  <Badge variant="outline" className={getStatusColor(order.status)}>
+                    {order.status === "RECEIVED" ? "Recebido" :
+                     order.status === "IN_PRODUCTION" ? "Em produção" :
+                     order.status === "IN_REVIEW" ? "Em revisão" :
+                     order.status === "DELIVERED" ? "Entregue" : 
+                     order.status === "REJECTED" ? "Rejeitado" : order.status}
+                  </Badge>
+                </div>
+                <p className="text-sm text-muted-foreground line-clamp-1">
+                  {order.description}
+                </p>
+                <div className="flex items-center justify-between mt-2 text-xs text-muted-foreground">
+                  <span>Atualizado {format(new Date(order.createdAt), "dd/MM/yyyy")}</span>
+                  <Button variant="ghost" size="sm" className="h-6 px-2">
+                    <MoreHorizontal className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </MainLayout>
