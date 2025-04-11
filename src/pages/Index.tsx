@@ -1,201 +1,262 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { BenefitCard } from "@/components/ui/benefitcard";
+import { FeaturesGrid } from "@/components/ui/FeaturesGrid";
 import { Button } from "@/components/ui/button";
-import { 
-  Palette, 
-  PenTool, 
-  Eye, 
-  Presentation, 
-  Smartphone, 
-  Workflow, 
-  FolderArchive,
-  Check 
+import {
+  Infinity,
+  Timer,
+  RefreshCcw,
+  Users,
+  Award,
+  Palette,
+  PenTool,
+  Eye,
+  Presentation,
+  Smartphone,
+  PersonStanding,
 } from "lucide-react";
 
+// Dados centralizados
+const beneficios = [
+  {
+    title: "Solicitações Ilimitadas",
+    description: "Envie quantas solicitações de design você precisar sem limites.",
+    icon: <Eye className="w-6 h-6 text-yellow-400" />,
+  },
+  {
+    title: "Entrega Mais Rápida",
+    description: "Receba seus designs em tempo recorde, acelerando seus projetos.",
+    icon: <Timer className="w-6 h-6 text-yellow-400" />,
+  },
+  {
+    title: "Revisões Ilimitadas",
+    description: "Peça quantas revisões forem necessárias até a perfeição.",
+    icon: <RefreshCcw className="w-6 h-6 text-yellow-400" />,
+  },
+  {
+    title: "Equipe Dedicada",
+    description: "Tenha uma equipe de design focada exclusivamente em seus projetos.",
+    icon: <Users className="w-6 h-6 text-yellow-400" />,
+  },
+  {
+    title: "Designers Top 1%",
+    description: "Trabalhe com os melhores talentos do mercado de design.",
+    icon: <Award className="w-6 h-6 text-yellow-400" />,
+  },
+];
+
+// Componente de seção de benefícios
+export function BeneficiosSection() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {beneficios.map((b, i) => (
+        <BenefitCard
+          key={i}
+          title={b.title}
+          description={b.description}
+          icon={b.icon}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Componente principal
 const Index = () => {
   const navigate = useNavigate();
 
-  const beneficios = [
-    {
-      title: "Solicitações Ilimitadas",
-      description: "Envie quantas solicitações de design você precisar sem limites."
-    },
-    {
-      title: "Entrega Mais Rápida",
-      description: "Receba seus designs em tempo recorde, acelerando seus projetos."
-    },
-    {
-      title: "Revisões Ilimitadas",
-      description: "Peça quantas revisões forem necessárias até a perfeição."
-    },
-    {
-      title: "Equipe Dedicada",
-      description: "Tenha uma equipe de design focada exclusivamente em seus projetos."
-    },
-    {
-      title: "Designers Top 1%",
-      description: "Trabalhe com os melhores talentos do mercado de design."
-    }
-  ];
-
-  const comofunciona = [
-    {
-      numero: "01",
-      title: "Envie Sua Solicitação de Design",
-      description: "Envie solicitações através do formulário guiado pela IA do KIMP360. Seu Gerente de Projeto revisará e o manterá atualizado sobre os próximos passos."
-    },
-    {
-      numero: "02",
-      title: "Trabalhe Com Sua Equipe de Design",
-      description: "Seu Gerente de Projeto e equipe de design dedicada trabalharão em suas solicitações, manterão você atualizado e submeterão designs para seu feedback."
-    },
-    {
-      numero: "03",
-      title: "Revise, Aprove, Repita",
-      description: "Revise designs no KIMP360, forneça feedback através de comentários, anotações ou gravações de tela. Depois, continue enviando novas solicitações ilimitadas."
-    }
-  ];
-
-  const servicosDiseño = [
-    {
-      title: "Design Gráfico",
-      description: "Criamos gráficos para branding e campanhas publicitárias para amplificar os esforços de marketing.",
-      icon: <Palette className="h-8 w-8" />
-    },
-    {
-      title: "Ilustrações Personalizadas",
-      description: "Obtenha ilustrações personalizadas desde logos até conceitos experimentais de marketing.",
-      icon: <PenTool className="h-8 w-8" />
-    },
-    {
-      title: "Identidade Visual",
-      description: "Não tem uma identidade visual? Nos diga o que você gostaria e criaremos para você.",
-      icon: <Eye className="h-8 w-8" />
-    },
-    {
-      title: "Apresentações",
-      description: "Criamos designs envolventes para tudo, desde pitch decks até apresentações corporativas.",
-      icon: <Presentation className="h-8 w-8" />
-    },
-    {
-      title: "Designs Web & App",
-      description: "Designs impressionantes e fáceis de usar para interfaces digitais.",
-      icon: <Smartphone className="h-8 w-8" />
-    }
-  ];
-
-  const recursosDestaque = [
-    {
-      title: "Fluxo de Trabalho Simplificado com TAREFFA360",
-      description: "TAREFFA360 é uma plataforma alimentada por IA que simplifica solicitações de design com fluxos de trabalho fáceis, feedback eficiente e organização perfeita para elevar projetos sem esforço e sempre melhorar a colaboração."
-    },
-    {
-      title: "Gestão de Design Mais Rápida",
-      description: "Crie, gerencie e colabore em solicitações de design rapidamente e facilmente em um único local centralizado. Tenha uma visão de 360° organizada do seu jeito."
-    },
-    {
-      title: "Projete Melhor, Como Uma Equipe",
-      description: "Convide quantos colaboradores quiser para ajudar a criar e gerenciar solicitações de design no TAREFFA360 com sua Equipe de Design Dedicada."
-    },
-    {
-      title: "Ativos de Marca em Um Só Lugar",
-      description: "Não perca mais tempo explicando sua marca. Faça upload de todos os seus ativos e depois os anexe com apenas alguns cliques ao criar novas solicitações de design."
-    }
-  ];
-
   return (
-    <div className="container mx-auto px-4 py-12 space-y-16">
-      <section className="text-center space-y-6">
-        <h1 className="text-4xl font-bold text-primary">
-          Desbloqueie o Potencial de Design Ilimitado para seu Negócio
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          TAREFFA360: Designs Ilimitados, Gerenciamento Descomplicado.
-          Essa é a Promessa da TAREFFA.
-        </p>
-        <div className="flex justify-center gap-4">
-          <Button onClick={() => navigate("/orders/new")}>
-            Começar Agora
+    <>
+      {/* Navbar */}
+      <header className="w-full py-4 border-b border-gray-200 bg-white sticky top-0 z-50">
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <div
+            className="text-xl font-bold text-primary cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            TAREFFA360
+          </div>
+          <nav className="hidden md:flex gap-6 text-sm text-muted-foreground">
+            <a href="#beneficios" className="hover:text-primary">Benefícios</a>
+            <a href="#como-funciona" className="hover:text-primary">Como Funciona</a>
+            <a href="#servicos" className="hover:text-primary">Serviços</a>
+            <a href="#recursos" className="hover:text-primary">Recursos</a>
+          </nav>
+          <Button size="sm" onClick={() => navigate("/orders/new")}>
+            Começar
           </Button>
-          <Button variant="outline">
-            Saiba Mais
-          </Button>
         </div>
-      </section>
+      </header>
 
-      <section>
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Descubra os Benefícios-Chave da Tareffa
-        </h2>
-        <div className="grid md:grid-cols-5 gap-4">
-          {beneficios.map((beneficio, index) => (
-            <div key={index} className="text-center space-y-2 p-4 workspace-card">
-              <Check className="mx-auto h-10 w-10 text-primary" />
-              <h3 className="font-semibold">{beneficio.title}</h3>
-              <p className="text-sm text-muted-foreground">{beneficio.description}</p>
-            </div>
-          ))}
+      {/* Conteúdo principal */}
+      <div className="container mx-auto px-4 py-12 space-y-16">
+        {/* Hero */}
+        <section
+          className="space-y-6 flex flex-col items-start text-left"
+          style={{ height: "100vh", paddingTop: "150px" }}
+        >
+          <h1
+            className="animate-blurIn font-semibold max-w-[720px] text-left"
+            style={{ fontSize: "57px", lineHeight: "65px" }}
+          >
+            Desbloqueie o Potencial de Design Ilimitado para seu Negócio
+          </h1>
+          <p
+            className="text-xl text-muted-foreground animate-blurIn opacity-0 max-w-[720px]"
+            style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
+          >
+            TAREFFA360: Designs Ilimitados, Gerenciamento Descomplicado. Essa é a Promessa da TAREFFA.
+          </p>
+          <div
+            className="flex justify-start gap-4 animate-blurIn opacity-0"
+            style={{ animationDelay: "2.5s", animationFillMode: "forwards" }}
+          >
+            <Button onClick={() => navigate("/orders/new")}>Começar Agora</Button>
+            <Button variant="outline">Saiba Mais</Button>
+          </div>
+        </section>
+
+        <section id="beneficios" className="w-full bg-black py-20">
+  <div className="max-w-[1280px] mx-auto px-4 text-[#F1F1F1]">
+    <h2 className="text-3xl font-bold text-left mb-12">
+      Quem se beneficia com a Tareffa?
+    </h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      
+      {/* Agências */}
+      <div className="bg-zinc-900 rounded-2xl p-6 shadow-md text-left">
+        <div className="mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#F1F1F1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18" />
+          </svg>
         </div>
-      </section>
-
-      <section>
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Como Funciona a Assinatura Tareffa
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {comofunciona.map((etapa, index) => (
-            <div key={index} className="space-y-4 p-6 workspace-card">
-              <div className="text-6xl font-bold text-primary opacity-20">{etapa.numero}</div>
-              <h3 className="text-xl font-semibold">{etapa.title}</h3>
-              <p className="text-muted-foreground">{etapa.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Serviços de Design
-        </h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {servicosDiseño.map((servico, index) => (
-            <div key={index} className="text-center space-y-4 p-6 workspace-card">
-              <div className="flex justify-center text-primary">{servico.icon}</div>
-              <h3 className="font-semibold text-xl">{servico.title}</h3>
-              <p className="text-muted-foreground">{servico.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Recursos em Destaque do TAREFFA360
-        </h2>
-        <div className="space-y-4">
-          {recursosDestaque.map((recurso, index) => (
-            <div key={index} className="p-6 workspace-card">
-              <h3 className="text-xl font-semibold mb-2">{recurso.title}</h3>
-              <p className="text-muted-foreground">{recurso.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="text-center">
-        <h2 className="text-3xl font-bold mb-4">
-          Introduzindo TAREFFA360
-        </h2>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-          Designs Ilimitados, Gerenciamento Descomplicado. 
-          Essa é a Promessa da TAREFFA.
+        <h3 className="text-sm font-semibold mb-1 text-[#F1F1F1]">Agências</h3>
+        <p className="text-xs text-[#BFBFBF]">
+          Agências e equipes de marketing que precisam de demandas recorrentes.
         </p>
-        <Button size="lg" onClick={() => navigate("/orders/new")}>
-          Experimente Agora
-        </Button>
-      </section>
+      </div>
+
+      {/* Times de marketing */}
+      <div className="bg-zinc-900 rounded-2xl p-6 shadow-md text-left">
+        <div className="mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#F1F1F1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87M12 12a4 4 0 100-8 4 4 0 000 8zm6 8v-1a4 4 0 00-3-3.87M6 20v-1a4 4 0 013-3.87" />
+          </svg>
+        </div>
+        <h3 className="text-sm font-semibold mb-1 text-[#F1F1F1]">Times de marketing</h3>
+        <p className="text-xs text-[#BFBFBF]">
+          Empresas de todos os tamanhos que querem um fluxo de trabalho organizado.
+        </p>
+      </div>
+
+      {/* Startups */}
+      <div className="bg-zinc-900 rounded-2xl p-6 shadow-md text-left">
+        <div className="mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#F1F1F1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-sm font-semibold mb-1 text-[#F1F1F1]">Startups</h3>
+        <p className="text-xs text-[#BFBFBF]">
+          Ideias espetaculares que necessitam de práticas rápidas e tangíveis.
+        </p>
+      </div>
+
+      {/* Empreendedores */}
+      <div className="bg-zinc-900 rounded-2xl p-6 shadow-md text-left">
+        <div className="mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#F1F1F1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m4-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+          </svg>
+        </div>
+        <h3 className="text-sm font-semibold mb-1 text-[#F1F1F1]">Empreendedores</h3>
+        <p className="text-xs text-[#BFBFBF]">
+          Empreendedores e startups que buscam soluções rápidas sem complicação.
+        </p>
+      </div>
+
+      {/* Pessoas físicas */}
+      <div className="bg-zinc-900 rounded-2xl p-6 shadow-md text-left">
+        <div className="mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#F1F1F1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6.5M12 20h.01" />
+          </svg>
+        </div>
+        <h3 className="text-sm font-semibold mb-1 text-[#F1F1F1]">Pessoas físicas</h3>
+        <p className="text-xs text-[#BFBFBF]">
+          Pessoa física que busca otimizar seu processo de trabalho.
+        </p>
+      </div>
+
     </div>
+  </div>
+</section>
+
+
+<section id="como-funciona" className="w-full py-24 bg-white">
+  <div className="max-w-7xl mx-auto px-4 flex flex-col items-center space-y-16">
+    {/* Título da seção */}
+    <div className="text-center max-w-2xl">
+      <h2 className="text-3xl font-semibold text-gray-900">Como funciona</h2>
+      <p className="text-muted-foreground mt-2 text-base">
+        Trabalhar com a TAREFFA é simples, eficiente e direto ao ponto.
+      </p>
+    </div>
+
+    {/* Blocos alinhados horizontalmente */}
+    <div className="flex flex-wrap justify-center gap-6">
+      {/* Bloco 1 */}
+      <div className="w-[425px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
+        {/* Placeholder para ilustração */}
+        <div className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center">
+          <span className="text-sm text-gray-400">[Ilustração ou ícone]</span>
+        </div>
+        {/* Texto */}
+        <div className="space-y-1">
+          <h3 className="text-lg font-medium text-gray-900">01. Envie sua Solicitação</h3>
+          <p className="text-sm text-muted-foreground">
+            Use o formulário inteligente da TAREFFA360 para enviar suas demandas de design. Seu gerente de projeto vai revisar e iniciar o processo.
+          </p>
+        </div>
+      </div>
+
+      {/* Bloco 2 */}
+      <div className="w-[425px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
+        <div className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center">
+          <span className="text-sm text-gray-400">[Ilustração ou ícone]</span>
+        </div>
+        <div className="space-y-1">
+          <h3 className="text-lg font-medium text-gray-900">02. Colabore com o Time</h3>
+          <p className="text-sm text-muted-foreground">
+            Seu gerente e o time de designers trabalham nas suas solicitações, mantêm você informado e entregam os arquivos para revisão.
+          </p>
+        </div>
+      </div>
+
+      {/* Bloco 3 */}
+      <div className="w-[345px] h-[430px] border border-gray-200 rounded-2xl p-6 flex flex-col gap-4 bg-white shadow-sm">
+        <div className="w-full h-40 bg-gray-50 rounded-xl border border-dashed border-gray-200 flex items-center justify-center">
+          <span className="text-sm text-gray-400">[Ilustração ou ícone]</span>
+        </div>
+        <div className="space-y-1">
+          <h3 className="text-lg font-medium text-gray-900">03. Revise, Aprove e Repita</h3>
+          <p className="text-sm text-muted-foreground">
+            Acompanhe os designs entregues, envie feedback com comentários e continue criando novas solicitações sem limites.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+        {/* Como Funciona - ainda não finalizado no trecho enviado */}
+        {/* <section id="como-funciona" className="mb-[100px]">...</section> */}
+      </div>
+    </>
   );
 };
 
